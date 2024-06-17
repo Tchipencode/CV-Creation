@@ -1,0 +1,29 @@
+body{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   margin: 0;
+}
+main{
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+   gap: 20px;
+
+}
+.education-form{
+   display:none;
+   flex-direction: column;
+   justify-content: center;
+   align-items: start;
+   gap: 1.5rem;
+}
+.education-input{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: start;
+
+}
