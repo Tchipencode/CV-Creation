@@ -17,13 +17,10 @@ function Education(){
          <button type="button" onClick={handleAdd}>Add more</button>
          {/* <button type="button" disabled>Edit</button> */}
       </div>
-
-
-
       </>
    )
 }
-export default function FormEducation({forms, setForms, handleOutput}){
+export default function FormEducation({forms, setForms, inputs, setInputs, handleOutput, educations}){
    const [newInputs, setNewInputs]=useState({});
    // const education=[
    //    {
@@ -50,28 +47,6 @@ export default function FormEducation({forms, setForms, handleOutput}){
       handleOutput(schoolName, studyTitle, studyYears);
       setNewInputs({schoolName:"",studyTitle:"",studyYears:""});
 
-      // const outputDiv= document.querySelector(".school-output");
-      // const outputStudy=document.createElement("div");
-      // const btnDiv= document.createElement("div");
-      // outputDiv.appendChild(outputStudy);
-      // outputStudy.appendChild(btnDiv);
-      // const para=document.createElement("p");
-      // para.textContent=studyTitle;
-      // outputStudy.appendChild(para);
-      // const btnEdit=document.createElement("button");
-      // btnEdit.textContent="Edit";
-      // btnDiv.appendChild(btnEdit);
-      // const btnDelete=document.createElement("button");
-      // btnDelete.textContent="Delete";
-      // btnDiv.appendChild(btnDelete);
-      // btnEdit.addEventListener("click", ()=>{
-      //    const EditSchoolName=document.querySelector(".schoolName");
-      //    EditSchoolName.textContent=schoolName;
-      // })
-      // btnDelete.addEventListener("click",()=>{
-      //    outputStudy.remove();
-      // })
-   
    }
    function handleAdd(){
       document.querySelector(".education-form").style.display="flex";
@@ -82,28 +57,43 @@ export default function FormEducation({forms, setForms, handleOutput}){
       document.querySelector(".btn-add-edu").style.display="flex";
 
    }
-   function EducationList(schoolName){
+   function EducationList(){
       return(
-         <div className="education-list">
-
-            <div className="educationList-item">
-               <h3 className="educationList-studyTitle" value={schoolName}></h3>
-               <div className="educationList-btn">
-                  <button className="educationList-btn" type="button" onClick={handleEdit}>Edit</button>
-                  <button className="educationList-btn" type="button" onClick={handleDelete}>Delete</button>
-               </div>
-            </div>
+         <div id="education-list" className="education-list">
+            {educations.map((education, index)=>{
+               return education!==null? <div key={index} >
+                  <h3 className="educationList-studyTitle" >{education.studyTitle}</h3>
+                  <div className="educationList-btn">
+                     <button className="educationList-btn" type="button" onClick={handleEdit}>Edit</button>
+                     <button className="educationList-btn" type="button" id={index} onClick={handleDelete}>Delete</button>
+                  </div>
+               </div>:null;
+            })}
          </div>
       )
    }
    function handleEdit(){}
-   function handleDelete(){}
+   function handleDelete(e){
+      const index=e.target.id;
+      console.log(index);
+      educations.splice(index, 1);
+      // for(let i=0; i<=educations.length; i++){
+      //    if(educations[i]==index){
+      //       educations.splice(index, 1);
+            
+      //    }
+         
+      // }
+      console.log(educations);
+      const inputsCopy={...inputs, education: educations};
+      setInputs(inputsCopy);
+   }
    return(
       <>
 
       <section className="education-section">
          <h2>EDUCATION</h2>
-         {/* <EducationList  schoolName={newInputs.schoolName}/> */}
+         <EducationList  educations={educations} schoolName={newInputs.schoolName}/>
          <form className="education-form" onSubmit={handleSubmit}>
             <div className="education-input">
                <label htmlFor="schoolName">

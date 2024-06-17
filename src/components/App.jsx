@@ -56,34 +56,37 @@ export default function App(){
       // const outputStudyYears=document.querySelector(".study-years");
       // outputStudyYears.textContent=studyYears;
 
-      const outputDiv= document.querySelector(".school-output");
-      const outputStudy=document.createElement("div");
-      const btnDiv= document.createElement("div");
-      outputDiv.appendChild(outputStudy);
-      outputStudy.appendChild(btnDiv);
-      const para=document.createElement("p");
-      para.textContent=studyTitle;
-      outputStudy.appendChild(para);
-      const btnEdit=document.createElement("button");
-      btnEdit.textContent="Edit";
-      btnDiv.appendChild(btnEdit);
-      const btnDelete=document.createElement("button");
-      btnDelete.textContent="Delete";
-      btnDiv.appendChild(btnDelete);
-      btnEdit.addEventListener("click", ()=>{
-         const EditSchoolName=document.querySelector(".schoolName");
-         EditSchoolName.textContent=inputs.education.schoolName;
-      })
-      btnDelete.addEventListener("click",(e)=>{
-         const index=e.target.index;
-         console.log(index);
-         outputStudy.remove();
-         for(let i=0; i<inputs.education.length; i++){
-            if(inputs.education[i].index==index){
-               inputs.education.splice(i, 1);
-            }
-         }
-      })
+      // const outputDiv= document.querySelector(".school-output");
+      // const outputStudy=document.createElement("div");
+      // const btnDiv= document.createElement("div");
+      // outputDiv.appendChild(outputStudy);
+      // outputStudy.appendChild(btnDiv);
+      // const para=document.createElement("p");
+      // para.textContent=studyTitle;
+      // outputStudy.appendChild(para);
+      // const btnEdit=document.createElement("button");
+      // btnEdit.textContent="Edit";
+      // btnDiv.appendChild(btnEdit);
+      // const btnDelete=document.createElement("button");
+      // btnDelete.textContent="Delete";
+      // btnDiv.appendChild(btnDelete);
+      // btnEdit.addEventListener("click", ()=>{
+      //    const EditSchoolName=document.querySelector(".schoolName");
+      //    EditSchoolName.textContent=inputs.education.schoolName;
+      // })
+      // btnDelete.addEventListener("click",(e)=>{
+      //    const index=e.target.tabIndex;
+      //    console.log(e.target);
+      //    // outputStudy.remove();
+      //    for(let i=0; i<inputs.education.length; i++){
+      //       if(inputs.education[i].index==index){
+      //          inputs.education.splice(i, 1);
+               
+      //       }
+      //       console.log(inputs);
+      //    }
+         
+      // })
    }
 
    // function handleChange(event){
@@ -104,7 +107,7 @@ export default function App(){
       <main>
          <div className="form-inputs">
             <Information />
-            <FormEducation /* schoolName={inputs.education.schoolName} */ handleOutput={handleOutput} /* handleChange={handleChange} */ />
+            <FormEducation inputs={inputs} setInputs={setInputs} educations={inputs.education} handleOutput={handleOutput} /* handleChange={handleChange} */ />
             <Experience />
          </div>
          <div className="form-output">

@@ -11,7 +11,7 @@ export default function DisplayEducation({educations}){
                <h4 className="school-name" >{education.schoolName}</h4>
                <h4 className="school-title">{education.studyTitle}</h4>
                <h4 className="study-years">{education.studyYears}</h4>
-            </div>:null
+            </div>:null;
 
          })}
 
