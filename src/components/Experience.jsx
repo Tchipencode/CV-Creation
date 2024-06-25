@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Experience(){
+function Experience(){
    
    // const [newInputs, setNewInputs]= useState("");
    const [forms, setForms]=useState([{}]);
@@ -21,57 +21,116 @@ export default function Experience(){
       </>
    )
 }
-function FormExperience({forms, setForms}){
-   const [inputs, setInputs]=useState({});
+export default function ExperienceForm({inputs, setInputs, handleOutputExperience, experiences}){
+   const [newInputs, setNewInputs]=useState({});
 
    function handleChange(event){
       const name=event.target.name;
       const value=event.target.value;
-      setInputs((values)=>({...values, [name]:value}));
-      console.log(inputs);
+      setNewInputs((values)=>({...values, [name]:value}));
+      console.log(newInputs);
    }
-   function handleRemove(index){
-      const formsCopy=[...forms];
-      formsCopy.splice(index, 1);
-      setForms(formsCopy);
+   function handleSubmit(event){
+      event.preventDefault();
+      console.log("form submitted");
+      const companyName=newInputs.companyName;
+      const positionTitle=newInputs.positionTitle;
+      const missions=newInputs.missions;
+      const startDate=newInputs.startDate;
+      const endDate=newInputs.enDate;
+      handleOutputExperience(companyName, positionTitle, missions, startDate, endDate);
+      setNewInputs({companyName:"",positionTitle:"", missions:"", startDate:"",endDate:""});
+
+   }
+   function handleAdd(){
+      document.querySelector(".experience-form").style.display="flex";
+      document.querySelector(".btn-add-exp").style.display="none";
+      setInputs(inputs);
+   }
+   function handleCancel(){
+      document.querySelector(".experience-form").style.display="none";
+      document.querySelector(".btn-add-exp").style.display="flex";
+
+   }
+   function ExperienceList(){
+      return(
+         <ul id="experience-list" className="experience-list">
+            {experiences.map((experience, index)=>{
+               return experience? <li key={index} >
+                  <h5 className="experienceList-studyTitle" >{experience.positionTitle}</h5>
+                  <div className="experienceList-btns">
+                     <button className="experienceList-btn" type="button" onClick={handleEdit}>Edit</button>
+                     <button className="experienceList-btn" type="button" id={index} onClick={handleDelete}>Delete</button>
+                  </div>
+               </li>:null;
+            })}
+         </ul>
+
+      )
+   }
+   function handleEdit(){}
+   function handleDelete(e){
+      const index=e.target.id;
+      console.log(index);
+      experiences.splice(index, 1);
+      console.log(experiences);
+      const inputsCopy={...inputs, experience: experiences};
+      setInputs(inputsCopy);
+   }
+   function handleButtonDisplay(experiences){
+      for(let i=0; experiences.length; i++){
+         if(experiences[i].companyName===null){
+            experiences.splice(i, 1);
+            document.querySelector(".experience-list").style.display="none";
+            console.log(document.querySelector(".experience-list"));
+         } else{
+            document.querySelector(".experience-list").style.display="inline-block";
+         }
+      }
+      
+
    }
    return(
       <>
-      <section className="experience-form">
-         <h1>EXPERIENCE</h1>
-         <form action="" /* onsSubmit={handleSubmit} */>
-            <label htmlFor="companyName">
-               <p>Company Name</p>
-               <input type="text" name="companyName" value={inputs.companyName} onChange={handleChange} id="companyName"/>
-            </label>
-            <label htmlFor="positionTitle">
-               <p>Position</p>
-               <input type="text" name="positionTitle" value={inputs.positionTitle} onChange={handleChange} id="positionTitle"/>
-            </label>
-            <label htmlFor="missions">
-               <p>Missions</p>
-               <textarea name="missions" value={inputs.missions} onChange={handleChange} id="missions" cols="30" rows="10"></textarea>
-            </label>
-            <label htmlFor="startDate">
-               <p>Start date</p>
-               <input type="date" name="startDate" value={inputs.startDate} onChange={handleChange} id="startDate"/>
-            </label>
-            <label htmlFor="endDate">
-               <p>End date</p>
-               <input type="date" name="endDate" value={inputs.endDate} onChange={handleChange} id="endDate" />
-            </label>
-            <div className="removeBtn">
-               <button type="button" onClick={()=>handleRemove(forms.index)}>Remove</button>
+      <section className="experience-section">
+         <h2>EXPERIENCE</h2>
+         <ExperienceList  experiences={experiences} onLoad={handleButtonDisplay}/>
+         <form className="experience-form" onSubmit={handleSubmit}>
+            <div className="experience-input">
+               <label htmlFor="companyName">
+                  <p>Company Name</p>
+                  <input type="text" name="companyName" value={newInputs.companyName} onChange={handleChange} id="companyName"/>
+               </label>
+               <label htmlFor="positionTitle">
+                  <p>Position</p>
+                  <input type="text" name="positionTitle" value={newInputs.positionTitle} onChange={handleChange} id="positionTitle"/>
+               </label>
+               <label htmlFor="missions">
+                  <p>Missions</p>
+                  <textarea name="missions" value={newInputs.missions} onChange={handleChange} id="missions" cols="30" rows="10"></textarea>
+               </label>
+               <label htmlFor="startDate">
+                  <p>Start date</p>
+                  <input type="date" name="startDate" value={newInputs.startDate} onChange={handleChange} id="startDate"/>
+               </label>
+               <label htmlFor="endDate">
+                  <p>End date</p>
+                  <input type="date" name="endDate" value={newInputs.endDate} onChange={handleChange} id="endDate" />
+               </label>
+               <div className="removeBtn">
+                  <button type="submit">Submit</button>
+                  <button type="button" onClick={handleCancel}>Cancel</button>
+               </div>
             </div>
          </form>
-
+         <button className="btn-add-exp" type="button" onClick={handleAdd}>Add More</button>
       </section>
 
       </>
    );
 
 }
-export {FormExperience};
+
 
 
 

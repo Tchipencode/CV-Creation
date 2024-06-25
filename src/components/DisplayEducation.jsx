@@ -1,5 +1,3 @@
-// import App from "./App"
-// import { FormEducation } from "./Education"
 
 export default function DisplayEducation({educations}){
    return(
@@ -9,12 +7,10 @@ export default function DisplayEducation({educations}){
          {educations.map((education, index)=>{
             return education? <div key={index}>
                <h4 className="school-name" >{education.schoolName}</h4>
-               <h4 className="school-title">{education.studyTitle}</h4>
-               <h4 className="study-years">{education.studyYears}</h4>
+               <p className="school-title">{education.studyTitle}</p>
+               <p className="graduated-years">{education.graduatedYears}</p>
             </div>:null;
-
          })}
-
       </div>
       </>
    )

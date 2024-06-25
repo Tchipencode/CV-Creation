@@ -1,18 +1,96 @@
+:root{
+   margin: 0px;
+}
 body{
    display: flex;
    flex-direction: column;
-   justify-content: center;
-   align-items: center;
+   place-items: center;
    margin: 0;
 }
-main{
-   display: flex;
-   flex-direction: row;
-   justify-content: center;
-   align-items: center;
-   gap: 20px;
-
+#root {
+   max-width: 1280px;
+   margin: 0;
+   padding: 2rem;
+   color: #213547;
+ }
+header{
+   text-align: center;
 }
+main{
+   display: grid;
+   grid-template-columns: 1fr 2fr;
+   gap: 20px;
+}
+.form-inputs{
+   display: flex;
+   flex-direction: column;
+   place-items: start center;
+   border-right: double #213547 8px;
+   padding: 20px;
+   width: 400px;
+   gap: 20px;
+   overflow: scroll;
+   height: 100vh;
+   max-height: 100vh;
+   background-color: #ebebeb;
+}
+.form-output{
+   display: grid;
+   grid-template-rows: 1fr;
+   padding: 20px; 
+}
+.form-output-print{
+   display:grid;
+   grid-template-areas: "a a "
+                        "b c ";
+
+   background-color: #ebebeb;
+   padding: 20px;
+   grid-template-columns: 250px 1fr;
+   grid-template-rows: 100px 2fr;
+}
+.cv-output-header{
+   display: flex;
+   flex-direction: column;
+   place-content: center center;
+   grid-area: a;
+}
+.cv-output-header h3{
+   margin: 0px;
+   padding: 0 0 15px 0;
+   text-align: center;
+}
+.cv-output-left-side{
+   display: flex;
+   flex-direction: column;
+   place-content: center start;
+   grid-area: b;
+   border-right: 2px solid;
+}
+.cv-output-right-side{
+   display: flex;
+   flex-direction: column;
+   place-content: center start;
+   grid-area: c;
+   padding-left:10px;
+}
+/* Information form */
+.contact-items{
+   display: flex;
+   flex-direction: column;
+   place-content: start start;
+}
+.contact-items-el{
+   display: grid;
+   grid-template-columns: 20px 1fr;
+   gap: 20px;
+   padding: 10px 0 10px;  
+}
+.contact-items-el p{
+   font-size: 0.9rem;
+   margin: 0;
+}
+/* Education form */
 .education-form{
    display:none;
    flex-direction: column;
@@ -22,6 +100,126 @@ main{
 }
 .education-input{
    display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: start;
+
+}
+.education-section{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: start;
+   width: 400px;
+   gap: 1.2rem;
+   margin: 10px;
+
+}
+h2{
+   margin: 0px;
+}
+.education-list{
+   display:flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: start;
+   width: 380px;
+   margin: 0px;
+   padding: 0 10px 0 10px;
+   gap: 1rem;
+}
+.education-list li{
+   display:flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   list-style: none;
+   width: 360px;
+   gap: 1.2rem;
+   background-color: antiquewhite;
+   box-shadow: 1px 0px 1px rgba(0, 0, 0, 0.4);
+   padding: 0 10px 0 10px;
+}
+.education-list li h5{
+   margin: 5px;
+}
+.educationList-btns{
+   display: inline-flex;
+   justify-content: space-between;
+   gap: 0.7rem;
+}
+/* Skills form */
+.skills-form{
+   display:none;
+   flex-direction: column;
+   justify-content: center;
+   align-items: start;
+   gap: 1.5rem;
+}
+.cv-skills-list{
+   padding-left: 20px;
+}
+/* Experience */
+.experience-form{
+   display:none;
+   flex-direction: column;
+   justify-content: center;
+   align-items: start;
+   gap: 1.5rem;
+}
+.experience-input{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: start;
+
+}
+.experience-section{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: start;
+   width: 400px;
+   gap: 1.2rem;
+   margin: 10px;
+}
+h2{
+   margin: 0px;
+}
+.experience-list{
+   display:flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: start;
+   width: 380px;
+   margin: 0px;
+   padding: 0 10px 0 10px;
+   gap: 1rem;
+}
+.experience-list li{
+   display:flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   list-style: none;
+   width: 360px;
+   gap: 1.2rem;
+   background-color: antiquewhite;
+   box-shadow: 1px 0px 1px rgba(0, 0, 0, 0.4);
+   padding: 0 10px 0 10px;
+   margin-right: 20px;
+
+}
+.experience-list li h5{
+   margin: 5px
+}
+.experienceList-btns{
+   display: inline-flex;
+   justify-content: space-between;
+   gap: 0.7rem;
+}
+.missions-items{
+   display:flex;
    flex-direction: column;
    justify-content: center;
    align-items: start;
