@@ -2,13 +2,16 @@ export default function DisplayExperience({experiences}){
    return(
       <>
       <div className="cv-experience">
-         <h2>Experience</h2>
+         <h3>EXPERIENCE</h3>
          {experiences.map((experience, index)=>{
-            return experience? <div key={index}>
-               <h4 className="company-name" >{experience.companyName}</h4>
-               <p className="position-Title">{experience.positionTitle}</p>
-               <p className="missions-items">{experience.missions}</p>
-               <p className="work-years">{experience.startDate} {experience.endDate}</p>
+            return experience? <div className="cv-experience-item" key={index}>
+               <p className="work-years">{experience.startDate} - {experience.endDate}</p>
+               <span>
+                  <p className="position-Title">{experience.companyName}:</p>
+                  <h4 className="company-name" >{experience.positionTitle}</h4>
+               </span>
+               <p className="missions-items"> <b>Missions:</b> {experience.missions}</p>
+
             </div>:null;
          })}
       </div>

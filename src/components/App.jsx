@@ -84,7 +84,7 @@ export default function App(){
          <div className="form-output">
             <div className="form-output-print">
                <div className="cv-output-header">
-                  <h3>{inputs.information.firstName}  {inputs.information.lastName}</h3>
+                  <h2>{inputs.information.firstName}  {inputs.information.lastName}</h2>
                   <h3 className="info-qualification">{inputs.information.qualification}</h3>
                </div>
                <div className="cv-output-left-side">
@@ -123,8 +123,8 @@ export default function App(){
                </div>
                <div className="cv-output-right-side">
                   <div className="summary">
-                     <h4>SUMMARY</h4>
-                     <h5>{inputs.information.summary}</h5>
+                     <h3>SUMMARY</h3>
+                     <p>{inputs.information.summary}</p>
                   </div>
                   <div className="experiences">
                      <DisplayExperience experiences={inputs.experience}/>

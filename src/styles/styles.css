@@ -1,16 +1,16 @@
 :root{
    margin: 0px;
 }
-body{
+ html, body{
    display: flex;
    flex-direction: column;
    place-items: center;
    margin: 0;
 }
 #root {
-   max-width: 1280px;
+   /* max-width: 1280px; */
    margin: 0;
-   padding: 2rem;
+   padding: 1rem;
    color: #213547;
  }
 header{
@@ -19,14 +19,14 @@ header{
 main{
    display: grid;
    grid-template-columns: 1fr 2fr;
-   gap: 20px;
+   /* gap: 20px; */
 }
 .form-inputs{
    display: flex;
    flex-direction: column;
    place-items: start center;
    border-right: double #213547 8px;
-   padding: 20px;
+   padding: 10px;
    width: 400px;
    gap: 20px;
    overflow: scroll;
@@ -37,7 +37,7 @@ main{
 .form-output{
    display: grid;
    grid-template-rows: 1fr;
-   padding: 20px; 
+   padding: 10px; 
 }
 .form-output-print{
    display:grid;
@@ -54,11 +54,13 @@ main{
    flex-direction: column;
    place-content: center center;
    grid-area: a;
+   text-align: center;
+   gap: 10px;
 }
 .cv-output-header h3{
    margin: 0px;
    padding: 0 0 15px 0;
-   text-align: center;
+   /* text-align: center; */
 }
 .cv-output-left-side{
    display: flex;
@@ -73,6 +75,10 @@ main{
    place-content: center start;
    grid-area: c;
    padding-left:10px;
+   gap: 10px;
+}
+.summary h3{
+   margin: 0px;
 }
 /* Information form */
 .contact-items{
@@ -148,6 +154,22 @@ h2{
    justify-content: space-between;
    gap: 0.7rem;
 }
+.cv-education-item{
+   padding-bottom: 10px;
+}
+.cv-education-item span {
+   display: flex;
+   flex-direction: row;
+   place-content: center space-between;
+   margin: 10px 0 10px 0;
+}
+.cv-education-item span h4{
+   margin: 0px;
+}
+.graduated-years{
+   font-style: italic;
+   margin: 0px;
+}
 /* Skills form */
 .skills-form{
    display:none;
@@ -211,7 +233,7 @@ h2{
 
 }
 .experience-list li h5{
-   margin: 5px
+   margin: 5px;
 }
 .experienceList-btns{
    display: inline-flex;
@@ -224,4 +246,17 @@ h2{
    justify-content: center;
    align-items: start;
 
+}
+.cv-experience-item span{
+   display: flex;
+   flex-direction: row;
+   place-content: center start;
+   gap: 20px;
+   margin: 10px 0 10px 0;
+}
+.cv-experience-item p{
+   margin: 10px 0px 10px 0px;
+}
+.cv-experience-item span p, h4{
+   margin: 0px;
 }
