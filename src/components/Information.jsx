@@ -1,18 +1,5 @@
 import { useState } from "react";
 
-// function Information(){
-//    const [forms, setForms]=useState([{}]);
-
-//    return (
-//       <>
-//       {forms.map((form, index)=>(<FormInformation key={index} forms={forms} setForms={setForms}/>))}
-//       <div className="btn-edit">
-//          <button type="button" disabled>Edit</button>
-//       </div>
-//       </>
-
-//    )
-// }
 export default function InformationForm({inputs, setInputs, handleOutputInformation, informations}){
    const [newInputs, setNewInputs]=useState({});
 
@@ -34,44 +21,15 @@ export default function InformationForm({inputs, setInputs, handleOutputInformat
       const linkedIn=newInputs.linkedIn;
       const summary=newInputs.summary;
       handleOutputInformation(firstName, lastName, qualification, email, telephone, location,linkedIn, summary);
-      setNewInputs({firstName:"",lastName:"", qualification:"", email:"", telephone:"", location:"",linkedIn:"", summary:""});
 
    }
-   // function handleAdd(){
-   //    document.querySelector(".information-form").style.display="flex";
-   //    document.querySelector(".btn-add-info").style.display="none";
-   //    setInputs(inputs);
-   // }
+
    function handleCancel(){
       document.querySelector(".information-form").style.display="none";
       document.querySelector(".btn-add-info").style.display="flex";
 
    }
-   // function EducationList(){
-   //    return(
-   //       <ul id="information-list" className="information-list">
-   //          {educations.map((education, index)=>{
-   //             return education? <li key={index} >
-   //                <h3 className="educationList-studyTitle" >{education.studyTitle}</h3>
-   //                <div className="educationList-btns">
-   //                   <button className="educationList-btn" type="button" onClick={handleEdit}>Edit</button>
-   //                   <button className="educationList-btn" type="button" id={index} onClick={handleDelete}>Delete</button>
-   //                </div>
-   //             </li>:null;
-   //          })}
-   //       </ul>
 
-   //    )
-   // }
-   // function handleEdit(){}
-   // function handleDelete(e){
-   //    const index=e.target.id;
-   //    console.log(index);
-   //    informations.splice(index, 1);
-   //    console.log(informations);
-   //    const inputsCopy={...inputs, information: informations};
-   //    setInputs(inputsCopy);
-   // }
    function handleButtonDisplay(educations){
       for(let i=0; educations.length; i++){
          if(educations[i].schoolName===null){
@@ -86,7 +44,7 @@ export default function InformationForm({inputs, setInputs, handleOutputInformat
    return(
       <>
       <section className="information-section">
-         <h2>PERSONAL INFORMATION</h2>
+         <h3>PERSONAL INFORMATION</h3>
          <form className="information-form" onSubmit={handleSubmit}>
             <div className="information-input">
                <label htmlFor="firstName">
@@ -129,8 +87,6 @@ export default function InformationForm({inputs, setInputs, handleOutputInformat
             </div>
          </form>
       </section>
-
-
       </>
    )
 }

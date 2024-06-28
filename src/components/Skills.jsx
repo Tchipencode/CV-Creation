@@ -1,26 +1,5 @@
 import { useState } from "react";
 
-// function Skills(){
-   
-//    // const [newInputs, setNewInputs]= useState("");
-//    const [forms, setForms]=useState([{}]);
-
-//    function handleAdd(){
-//       console.log("handleAdd");
-//       setForms([...forms, {}]);
-//    }
-//    return (
-//       <>
-//       {/* {forms.map((form, index)=>(<FormSkills key={index} forms={forms} setForms={setForms}/>))} */}
-//       <div className="btn-edit">
-//          <button type="button" onClick={handleAdd}>Add more</button>
-//          <button type="button" disabled>Edit</button>
-//       </div>
-
-      
-//       </>
-//    )
-// }
 export default function SkillsForm({inputs, setInputs, handleOutputSkills, allSkills}){
    const [newInputs, setNewInputs]=useState({});
 
@@ -33,10 +12,9 @@ export default function SkillsForm({inputs, setInputs, handleOutputSkills, allSk
    function handleSubmit(event){
       event.preventDefault();
       console.log("form submitted");
-      const software=newInputs.software;
       const skill=newInputs.skill;
-      handleOutputSkills(software, skill);
-      setNewInputs({software:"",skill:""});
+      handleOutputSkills(skill);
+      setNewInputs({skill:""});
 
    }
    function handleAdd(){
@@ -56,17 +34,23 @@ export default function SkillsForm({inputs, setInputs, handleOutputSkills, allSk
                return skills? <li key={index} >
                   <h4 className="skillsList-skills" >{skills.skill}</h4>
                   <div className="skillsList-btns">
-                     <button className="skillsList-btn" type="button" onClick={handleEdit}>Edit</button>
+                     <button className="skillsList-btn" type="button" id={index} onClick={handleEdit}>Edit</button>
                      <button className="skillsList-btn" type="button" id={index} onClick={handleDelete}>Delete</button>
                   </div>
                </li>:null;
             })}
          </ul>
-
-
       )
    }
-   function handleEdit(){}
+   function handleEdit(e){
+      const index=e.target.id;
+      const inputValue=document.querySelector("#skill");
+      const item=allSkills[index].skill;
+      inputValue.value=item;
+      const newInputsCopy={...newInputs, skill:item, id:index};
+      setNewInputs(newInputsCopy);         
+      console.log(newInputs);
+   }
    function handleDelete(e){
       const index=e.target.id;
       console.log(index);
@@ -91,14 +75,10 @@ export default function SkillsForm({inputs, setInputs, handleOutputSkills, allSk
    return(
       <>
       <section className="skills-section">
-         <h2>SKILLS</h2>
+         <h3>SKILLS</h3>
          <SkillsList  allSkills={allSkills} onLoad={handleButtonDisplay}/>
          <form className="skills-form" onSubmit={handleSubmit}>
             <div className="skills-input">
-               <label htmlFor="software">
-                  <p>Software</p>
-                  <input type="text" name="software" value={newInputs.software} onChange={handleChange} id="software"/>
-               </label>
                <label htmlFor="skill">
                   <p>Skill</p>
                   <input type="text" name="skill" value={newInputs.skill} onChange={handleChange} id="skill"/>

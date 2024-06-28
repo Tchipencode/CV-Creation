@@ -1,26 +1,5 @@
 import { useState } from "react";
 
-function Experience(){
-   
-   // const [newInputs, setNewInputs]= useState("");
-   const [forms, setForms]=useState([{}]);
-
-   function handleAdd(){
-      console.log("handleAdd");
-      setForms([...forms, {}]);
-   }
-   return (
-      <>
-      {forms.map((form, index)=>(<FormExperience key={index} forms={forms} setForms={setForms}/>))}
-      <div className="btn-edit">
-         <button type="button" onClick={handleAdd}>Add more</button>
-         <button type="button" disabled>Edit</button>
-      </div>
-
-      
-      </>
-   )
-}
 export default function ExperienceForm({inputs, setInputs, handleOutputExperience, experiences}){
    const [newInputs, setNewInputs]=useState({});
 
@@ -37,9 +16,9 @@ export default function ExperienceForm({inputs, setInputs, handleOutputExperienc
       const positionTitle=newInputs.positionTitle;
       const missions=newInputs.missions;
       const startDate=newInputs.startDate;
-      const endDate=newInputs.enDate;
+      const endDate=newInputs.endDate;
       handleOutputExperience(companyName, positionTitle, missions, startDate, endDate);
-      setNewInputs({companyName:"",positionTitle:"", missions:"", startDate:"",endDate:""});
+      setNewInputs({companyName:"",positionTitle:"", missions:"", startDate:"", endDate:""});
 
    }
    function handleAdd(){
@@ -59,7 +38,7 @@ export default function ExperienceForm({inputs, setInputs, handleOutputExperienc
                return experience? <li key={index} >
                   <h5 className="experienceList-studyTitle" >{experience.positionTitle}</h5>
                   <div className="experienceList-btns">
-                     <button className="experienceList-btn" type="button" onClick={handleEdit}>Edit</button>
+                     <button className="experienceList-btn" type="button" id={index} onClick={handleEdit}>Edit</button>
                      <button className="experienceList-btn" type="button" id={index} onClick={handleDelete}>Delete</button>
                   </div>
                </li>:null;
@@ -68,7 +47,27 @@ export default function ExperienceForm({inputs, setInputs, handleOutputExperienc
 
       )
    }
-   function handleEdit(){}
+   function handleEdit(e){
+      const index=e.target.id;
+      const inputCompany=document.querySelector("#companyName");
+      const inputPosition=document.querySelector("#positionTitle");
+      const inputMissions=document.querySelector("#missions");
+      const inputStartDate=document.querySelector("#startDate");
+      const inputEndDate=document.querySelector("#endDate");
+      const companyItem=experiences[index].companyName;
+      const positionItem=experiences[index].positionTitle;
+      const missionsItem=experiences[index].missions;
+      const startItem=experiences[index].startDate;
+      const endItem=experiences[index].endDate;
+      inputCompany.value=companyItem;
+      inputPosition.value=positionItem;
+      inputMissions.value=missionsItem;
+      inputStartDate.value=startItem;
+      inputEndDate.value=endItem;
+      const newInputsCopy={...newInputs, companyName:companyItem, positionTitle:positionItem, missions:missionsItem, startDate:startItem, endDate:endItem, id:index};
+      setNewInputs(newInputsCopy);         
+      console.log(newInputs);
+   }
    function handleDelete(e){
       const index=e.target.id;
       console.log(index);
@@ -87,13 +86,11 @@ export default function ExperienceForm({inputs, setInputs, handleOutputExperienc
             document.querySelector(".experience-list").style.display="inline-block";
          }
       }
-      
-
    }
    return(
       <>
       <section className="experience-section">
-         <h2>EXPERIENCE</h2>
+         <h3>EXPERIENCE</h3>
          <ExperienceList  experiences={experiences} onLoad={handleButtonDisplay}/>
          <form className="experience-form" onSubmit={handleSubmit}>
             <div className="experience-input">
@@ -111,11 +108,11 @@ export default function ExperienceForm({inputs, setInputs, handleOutputExperienc
                </label>
                <label htmlFor="startDate">
                   <p>Start date</p>
-                  <input type="date" name="startDate" value={newInputs.startDate} onChange={handleChange} id="startDate"/>
+                  <input type="number" name="startDate" value={newInputs.startDate} onChange={handleChange} id="startDate"/>
                </label>
                <label htmlFor="endDate">
                   <p>End date</p>
-                  <input type="date" name="endDate" value={newInputs.endDate} onChange={handleChange} id="endDate" />
+                  <input type="number" name="endDate" value={newInputs.endDate} onChange={handleChange} id="endDate" />
                </label>
                <div className="removeBtn">
                   <button type="submit">Submit</button>

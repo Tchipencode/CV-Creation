@@ -4,13 +4,6 @@ import { useState } from "react";
 
 export default function EducationForm({inputs, setInputs, handleOutputEducation, educations}){
    const [newInputs, setNewInputs]=useState({});
-   // const education=[
-   //    {
-   //       schoolName:"",
-   //       studyTitle:"",
-   //       studyYears:"",
-   //    }
-   // ]
 
    function handleChange(event){
       const name=event.target.name;
@@ -45,7 +38,7 @@ export default function EducationForm({inputs, setInputs, handleOutputEducation,
                return education? <li key={index} >
                   <h5 className="educationList-studyTitle" >{education.studyTitle}</h5>
                   <div className="educationList-btns">
-                     <button className="educationList-btn" type="button" onClick={handleEdit}>Edit</button>
+                     <button className="educationList-btn" type="button" id={index} onClick={handleEdit}>Edit</button>
                      <button className="educationList-btn" type="button" id={index} onClick={handleDelete}>Delete</button>
                   </div>
                </li>:null;
@@ -54,16 +47,25 @@ export default function EducationForm({inputs, setInputs, handleOutputEducation,
 
       )
    }
-   function handleEdit(){}
+   function handleEdit(e){
+      const index=e.target.id;
+      const inputSchoolName=document.querySelector("#schoolName");
+      const inputStudyTitle=document.querySelector("#studyTitle");
+      const inputGraduatedYears=document.querySelector("#graduatedYears");
+      const schoolItem=educations[index].schoolName;
+      const studyItem=educations[index].studyTitle;
+      const graduatedYearsItem=educations[index].graduatedYears;
+      inputSchoolName.value=schoolItem;
+      inputStudyTitle.value=studyItem;
+      inputGraduatedYears.value=graduatedYearsItem;
+      const newInputsCopy={...newInputs, schoolName:schoolItem, studyTitle:studyItem, graduatedYears:graduatedYearsItem, id:index};
+      setNewInputs(newInputsCopy);         
+      console.log(newInputs);
+   }
    function handleDelete(e){
       const index=e.target.id;
       console.log(index);
       educations.splice(index, 1);
-      // for(let i=0; i<=educations.length; i++){
-      //    if(educations[i]==index){
-      //       educations.splice(index, 1);      
-      //    }  
-      // }
       console.log(educations);
       const inputsCopy={...inputs, education: educations};
       setInputs(inputsCopy);
@@ -82,7 +84,7 @@ export default function EducationForm({inputs, setInputs, handleOutputEducation,
    return(
       <>
       <section className="education-section">
-         <h2>EDUCATION</h2>
+         <h3>EDUCATION</h3>
          <EducationList  educations={educations} onLoad={handleButtonDisplay}/>
          <form className="education-form" onSubmit={handleSubmit}>
             <div className="education-input">

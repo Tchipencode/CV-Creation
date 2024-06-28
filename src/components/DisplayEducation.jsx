@@ -3,7 +3,7 @@ export default function DisplayEducation({educations}){
    return(
       <>
       <div className="cv-education">
-         <h3>EDUCATION</h3>
+         {/* <h3>EDUCATION</h3> */}
          {educations.map((education, index)=>{
             return education? <div className="cv-education-item" key={index}>
                <span>
